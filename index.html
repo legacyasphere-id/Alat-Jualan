@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#FDFBF7" />
+<title>Alat Jualan — by Legacya Sphere</title>
+<meta name="description" content="Alat Jualan — bantu jualan online lebih mudah, cepat, dan untung. Kalkulator untung, pembuat judul produk, dan caption jualan untuk UMKM Indonesia." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --paper: #FDFBF7;
+    --cream: #F5EFE5;
+    --cream-deep: #EDE4D3;
+    --ink: #2A2620;
+    --ink-soft: #5C544A;
+    --muted: #9A9085;
+    --line: #E8DFCF;
+    --clay: #B86F4A;
+    --clay-dark: #8E5235;
+    --sage: #7A9863;
+    --sage-dark: #5C7A48;
+    --rust: #A85A3C;
+    --warn: #C8923A;
+    --warn-bg: #FBF3E2;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse at top left, var(--cream) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, var(--cream) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  input, select, textarea { font-family: inherit; }
+
+  /* Header */
+  .header {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(253, 251, 247, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    max-width: 1024px; margin: 0 auto;
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.15s; }
+  .logo:active { transform: scale(0.95); }
+  .logo-mark {
+    width: 28px; height: 28px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--clay) 0%, var(--clay-dark) 100%);
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+    box-shadow: 0 1px 3px rgba(184, 111, 74, 0.25);
+  }
+  .logo-name {
+    font-family: var(--serif); font-weight: 600; font-size: 16px;
+    letter-spacing: -0.01em; color: var(--ink);
+    line-height: 1;
+  }
+  .logo-tag {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--muted); margin-top: 3px;
+  }
+  .header-link {
+    font-size: 12px; font-weight: 500; color: var(--ink-soft);
+    text-decoration: none; display: flex; align-items: center; gap: 4px;
+    transition: opacity 0.15s;
+  }
+  .header-link:hover { opacity: 0.7; }
+  @media (max-width: 640px) { .header-link { display: none; } }
+
+  /* Layout helpers */
+  .container { max-width: 1024px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 48px 20px; }
+  @media (min-width: 640px) { .section { padding: 80px 32px; } }
+
+  /* Hero */
+  .hero { text-align: center; padding: 48px 20px 64px; }
+  @media (min-width: 640px) { .hero { padding: 80px 32px 96px; } }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: var(--cream); color: var(--clay-dark);
+    border: 1px solid var(--cream-deep);
+    font-size: 12px; font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+  h1.hero-title {
+    font-family: var(--serif); font-weight: 600;
+    font-size: 40px; line-height: 1.05; letter-spacing: -0.02em;
+    margin: 0; color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+  @media (min-width: 640px) { h1.hero-title { font-size: 60px; } }
+  .hero-sub {
+    margin: 20px auto 0; max-width: 560px;
+    font-size: 16px; line-height: 1.6; color: var(--ink-soft);
+  }
+  @media (min-width: 640px) { .hero-sub { font-size: 20px; } }
+  .hero-sub em {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+  }
+  .em-clay { color: var(--clay-dark); }
+  .em-sage { color: var(--sage-dark); }
+  .hero-cta {
+    margin-top: 36px;
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .hero-note {
+    margin-top: 20px; font-size: 12px; color: var(--muted);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 24px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--clay) 0%, var(--clay-dark) 100%);
+    color: white; font-weight: 600; font-size: 15px;
+    box-shadow: 0 2px 8px rgba(184, 111, 74, 0.25);
+    transition: all 0.15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(184, 111, 74, 0.3); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 16px; border-radius: 12px;
+    background: white; color: var(--ink-soft);
+    border: 1px solid var(--line); font-weight: 500; font-size: 14px;
+    transition: all 0.15s;
+  }
+  .btn-ghost:hover { background: #FAF5EC; }
+  .btn-ghost:active { transform: scale(0.98); }
+  .btn-dark {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 16px; border-radius: 12px;
+    background: var(--ink); color: white;
+    font-weight: 600; font-size: 14px;
+    transition: all 0.15s; width: 100%;
+  }
+  .btn-dark:active { transform: scale(0.98); }
+
+  /* Tools grid */
+  .section-eyebrow {
+    text-align: center; font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--clay); margin-bottom: 8px;
+  }
+  .section-title {
+    text-align: center; font-family: var(--serif);
+    font-size: 24px; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--ink); margin: 0 auto 40px;
+    max-width: 560px;
+  }
+  @media (min-width: 640px) { .section-title { font-size: 30px; } }
+  .tools-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+  .tool-card {
+    background: white; border: 1px solid var(--line);
+    border-radius: 16px; padding: 24px;
+    text-align: left; transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(42, 38, 32, 0.04);
+    cursor: pointer;
+  }
+  @media (min-width: 640px) { .tool-card { padding: 28px; } }
+  .tool-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(42, 38, 32, 0.08); }
+  .tool-card:active { transform: scale(0.99); }
+  .tool-icon {
+    width: 48px; height: 48px; border-radius: 16px;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px; transition: all 0.2s;
+  }
+  .tool-card:hover .tool-icon { transform: rotate(-4deg) scale(1.1); }
+  .tool-title {
+    font-family: var(--serif); font-size: 18px; font-weight: 600;
+    letter-spacing: -0.01em; color: var(--ink); margin: 0 0 6px;
+  }
+  .tool-desc { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .tool-cta {
+    margin-top: 20px; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; transition: gap 0.15s;
+  }
+  .tool-card:hover .tool-cta { gap: 10px; }
+
+  /* Benefits section */
+  .benefits-bg { background: var(--cream); }
+  .benefits-grid { display: grid; gap: 32px; grid-template-columns: 1fr; padding-top: 64px; }
+  @media (min-width: 640px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
+  .benefit-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: white; border: 1px solid var(--cream-deep);
+    color: var(--clay-dark);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .benefit-title {
+    font-family: var(--serif); font-size: 18px; font-weight: 600;
+    color: var(--ink); margin: 0 0 6px;
+  }
+  .benefit-desc { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+  /* Bottom CTA */
+  .bottom-cta {
+    max-width: 720px; margin: 0 auto;
+    background: linear-gradient(135deg, var(--ink) 0%, #3D362D 100%);
+    color: white; border-radius: 24px; padding: 40px 24px; text-align: center;
+  }
+  @media (min-width: 640px) { .bottom-cta { padding: 56px 40px; } }
+  .bottom-cta h2 {
+    font-family: var(--serif); font-size: 24px; font-weight: 600;
+    letter-spacing: -0.01em; margin: 0;
+  }
+  @media (min-width: 640px) { .bottom-cta h2 { font-size: 36px; } }
+  .bottom-cta p { margin: 12px auto 0; max-width: 400px; font-size: 14px; opacity: 0.8; }
+  .bottom-cta-btns { margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .bottom-cta-btn-light, .bottom-cta-btn-line {
+    padding: 12px 22px; border-radius: 12px; font-weight: 600; font-size: 14px;
+    transition: all 0.15s;
+  }
+  .bottom-cta-btn-light { background: white; color: var(--ink); }
+  .bottom-cta-btn-light:hover { transform: scale(1.02); }
+  .bottom-cta-btn-line { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.25); }
+  .bottom-cta-btn-line:hover { background: rgba(255,255,255,0.1); }
+
+  /* Footer */
+  .footer {
+    margin-top: 80px; padding: 40px 20px;
+    border-top: 1px solid var(--line); background: var(--cream);
+  }
+  .footer-inner {
+    max-width: 1024px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-direction: column; gap: 16px; text-align: center;
+  }
+  @media (min-width: 640px) { .footer-inner { flex-direction: row; text-align: right; } }
+  .footer-text { font-size: 12px; color: var(--muted); }
+  .footer-link { color: var(--clay); text-decoration: underline; text-underline-offset: 2px; font-size: 12px; }
+
+  /* Tool page header */
+  .tool-page { padding: 32px 20px; max-width: 1024px; margin: 0 auto; }
+  @media (min-width: 640px) { .tool-page { padding: 48px 32px; } }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 500; color: var(--ink-soft);
+    margin-bottom: 20px; transition: opacity 0.15s;
+  }
+  .back-btn:hover { opacity: 0.7; }
+  .page-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
+  .page-icon {
+    width: 48px; height: 48px; border-radius: 16px;
+    background: var(--cream); color: var(--clay-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .page-title {
+    font-family: var(--serif); font-size: 24px; font-weight: 600;
+    letter-spacing: -0.01em; color: var(--ink); margin: 0 0 4px; line-height: 1.2;
+  }
+  @media (min-width: 640px) { .page-title { font-size: 30px; } }
+  .page-sub { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+  /* Form components */
+  .field { margin-bottom: 16px; }
+  .field-label {
+    display: flex; align-items: baseline; gap: 8px;
+    margin-bottom: 6px;
+  }
+  .field-label-text { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .field-hint { font-size: 12px; color: var(--muted); }
+  .input-text, .input-money, .input-select {
+    width: 100%; padding: 12px 14px; border-radius: 12px;
+    background: white; border: 1px solid var(--line);
+    color: var(--ink); font-size: 16px; outline: none;
+    transition: all 0.15s;
+  }
+  .input-text:focus, .input-money:focus-within, .input-select:focus {
+    border-color: var(--clay);
+    box-shadow: 0 0 0 3px rgba(184, 111, 74, 0.08);
+  }
+  .input-money {
+    padding: 0; display: flex; align-items: center;
+  }
+  .input-money-prefix {
+    padding-left: 14px; font-size: 14px; font-weight: 600; color: var(--muted);
+  }
+  .input-money input {
+    flex: 1; padding: 12px 14px 12px 8px; border: none; outline: none;
+    background: transparent; font-size: 16px; color: var(--ink);
+  }
+  .input-select {
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239A9085' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px; cursor: pointer;
+  }
+
+  /* Slider */
+  .slider-wrap { width: 100%; }
+  .slider-value {
+    display: block; font-family: var(--serif); font-size: 24px; font-weight: 700;
+    color: var(--clay-dark); margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  input[type="range"].slider-aj {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 8px; border-radius: 999px; outline: none;
+    cursor: pointer;
+  }
+  input[type="range"].slider-aj::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--clay); border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(184, 111, 74, 0.35); cursor: pointer;
+    transition: transform 0.15s;
+  }
+  input[type="range"].slider-aj::-webkit-slider-thumb:hover { transform: scale(1.1); }
+  input[type="range"].slider-aj::-moz-range-thumb {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--clay); border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(184, 111, 74, 0.35); cursor: pointer;
+  }
+
+  /* Cards & panels */
+  .card { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+  @media (min-width: 640px) { .card { padding: 28px; } }
+  .panel-cream { background: var(--cream); border: 1px solid var(--cream-deep); border-radius: 16px; padding: 20px; }
+  @media (min-width: 640px) { .panel-cream { padding: 24px; } }
+  .panel-loss { background: #FBEEEA; border-color: #E8B5A8; }
+  .panel-warn {
+    background: var(--warn-bg); border: 1px solid #ECD9A8;
+    border-radius: 12px; padding: 12px;
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 8px; cursor: pointer; transition: box-shadow 0.15s;
+    width: 100%; text-align: left;
+  }
+  .panel-warn:hover { box-shadow: 0 2px 6px rgba(200, 146, 58, 0.15); }
+
+  /* Calculator layout */
+  .calc-layout { display: grid; gap: 20px; grid-template-columns: 1fr; }
+  @media (min-width: 1024px) { .calc-layout { grid-template-columns: 1.1fr 1fr; gap: 28px; } }
+  .calc-result { position: sticky; top: 88px; align-self: flex-start; }
+  .result-label-tiny {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .result-price-label { font-size: 12px; font-weight: 500; color: var(--ink-soft); margin-top: 16px; }
+  .result-price {
+    font-family: var(--serif); font-size: 40px; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--ink);
+    font-variant-numeric: tabular-nums; line-height: 1.1;
+    margin-top: 4px;
+  }
+  @media (min-width: 640px) { .result-price { font-size: 48px; } }
+  .result-rows { margin-top: 20px; border-top: 1px solid var(--cream-deep); }
+  .result-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0;
+  }
+  .result-row-label { font-size: 14px; color: var(--ink-soft); }
+  .result-row-value {
+    font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .text-good { color: var(--sage-dark); }
+  .text-clay { color: var(--clay-dark); }
+
+  /* Mode tabs (caption) */
+  .mode-grid { display: grid; gap: 8px; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 640px) { .mode-grid { grid-template-columns: repeat(5, 1fr); } }
+  .mode-btn {
+    padding: 12px; border-radius: 12px; text-align: left;
+    background: white; color: var(--ink); border: 1px solid var(--line);
+    transition: all 0.15s; cursor: pointer;
+  }
+  .mode-btn:active { transform: scale(0.98); }
+  .mode-btn.active {
+    background: var(--ink); color: white; border-color: var(--ink);
+  }
+  .mode-btn-label { font-size: 14px; font-weight: 600; line-height: 1.2; margin-top: 6px; }
+  .mode-btn-hint { font-size: 10px; line-height: 1.2; margin-top: 2px; color: var(--muted); }
+  .mode-btn.active .mode-btn-hint { color: rgba(255,255,255,0.7); }
+
+  /* Title cards */
+  .title-card {
+    padding: 16px; border-radius: 12px;
+    display: flex; align-items: flex-start; gap: 12px;
+    background: white; border: 1px solid var(--line);
+    transition: box-shadow 0.15s;
+  }
+  .title-card:hover { box-shadow: 0 2px 6px rgba(42,38,32,0.06); }
+  .title-num {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--cream); color: var(--clay-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .title-text { flex: 1; font-size: 14px; line-height: 1.5; color: var(--ink); }
+  .title-meta { font-size: 10px; font-weight: 500; color: var(--muted); margin-top: 4px; }
+  .title-meta.ideal { color: var(--sage-dark); }
+  .title-copy {
+    padding: 8px; border-radius: 8px; opacity: 0.6;
+    color: var(--ink-soft); transition: all 0.15s;
+  }
+  .title-copy:hover { background: #F5F0E5; opacity: 1; }
+
+  /* Keyword chips */
+  .kw-section {
+    background: var(--cream); border: 1px solid var(--cream-deep);
+    border-radius: 16px; padding: 20px;
+  }
+  .kw-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--clay-dark);
+  }
+  .kw-desc { font-size: 12px; color: var(--ink-soft); margin: 0 0 14px; }
+  .kw-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .kw-chip {
+    font-size: 12px; padding: 6px 10px; border-radius: 8px;
+    background: white; color: var(--ink);
+    border: 1px solid var(--cream-deep); font-weight: 500;
+    transition: transform 0.15s; cursor: pointer;
+  }
+  .kw-chip:hover { transform: translateY(-2px); }
+
+  /* Caption output */
+  .caption-output {
+    border-radius: 16px; overflow: hidden;
+    background: white; border: 1px solid var(--line);
+  }
+  .caption-text {
+    padding: 20px; font-size: 14px; line-height: 1.6;
+    white-space: pre-wrap; color: var(--ink); margin: 0;
+    font-family: var(--sans);
+  }
+  @media (min-width: 640px) { .caption-text { padding: 24px; } }
+  .caption-actions {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 16px; border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+  @media (min-width: 640px) { .caption-actions { flex-direction: row; } }
+
+  /* Helper text & status */
+  .helper-text { margin-top: 12px; font-size: 11px; line-height: 1.5; color: var(--muted); }
+  .helper-text-md { margin-top: 12px; font-size: 12px; color: var(--muted); }
+  .empty-state { margin-top: 40px; text-align: center; font-size: 14px; color: var(--muted); }
+
+  /* Two-column responsive */
+  .two-col { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+  .field-row { display: grid; gap: 16px; }
+  @media (min-width: 640px) { .field-row { grid-template-columns: 1fr 1fr; } }
+  .result-layout { display: grid; gap: 20px; }
+  @media (min-width: 1024px) { .result-layout { grid-template-columns: 1.4fr 1fr; } }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: white;
+    padding: 10px 18px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    z-index: 100; display: flex; align-items: center; gap: 6px;
+    animation: toast-in 0.2s ease;
+  }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  /* Icon helpers */
+  .icon { width: 16px; height: 16px; flex-shrink: 0; }
+  .icon-sm { width: 14px; height: 14px; flex-shrink: 0; }
+  .icon-md { width: 20px; height: 20px; flex-shrink: 0; }
+  .icon-lg { width: 24px; height: 24px; flex-shrink: 0; }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+/* ============================================================
+   ALAT JUALAN — by Legacya Sphere
+   Vanilla JS, no build step. Single-file SPA.
+   ============================================================ */
+
+/* ---------- Helpers ---------- */
+const formatRupiah = (n) => {
+  if (n === null || n === undefined || isNaN(n)) return 'Rp 0';
+  return 'Rp ' + Math.round(n).toLocaleString('id-ID');
+};
+const parseNumber = (s) => {
+  if (typeof s === 'number') return s;
+  const cleaned = String(s).replace(/[^\d]/g, '');
+  return cleaned === '' ? 0 : parseInt(cleaned, 10);
+};
+const formatThousands = (s) => {
+  const n = parseNumber(s);
+  if (n === 0 && String(s).replace(/[^\d]/g, '') === '') return '';
+  return n.toLocaleString('id-ID');
+};
+const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const shuffle = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const pickN = (arr, n) => shuffle(arr).slice(0, Math.min(n, arr.length));
+
+/* ---------- 25 Kategori ---------- */
+const CATEGORIES = {
+  fashion_wanita: { label: 'Fashion Wanita', group: 'Fashion', keywords: ['Premium','Korean Style','Kekinian','Trendy','Adem','Bahan Tebal','Casual','Estetik','OOTD','Stylish'], longTail: ['adem dipakai seharian','bahan tebal tidak nerawang','jahitan rapi','cocok untuk daily outfit','fit di badan'], badges: ['Best Seller','New Arrival','Limited Edition'], tone: 'trendy', emoji: ['✨','💫','🌸','👗','💕'], benefitFallback: 'Bahan adem, jahitan rapi, fit di badan' },
+  fashion_pria: { label: 'Fashion Pria', group: 'Fashion', keywords: ['Premium','Casual','Trendy','Bahan Tebal','Distro','Cool','Adem','Kekinian'], longTail: ['bahan adem tidak gerah','jahitan kuat','cocok untuk hangout','simpel tapi keren'], badges: ['Best Seller','New Arrival','Distro Quality'], tone: 'trendy', emoji: ['🔥','✨','👕','💪'], benefitFallback: 'Bahan adem, model simpel keren, cocok daily wear' },
+  fashion_hijab: { label: 'Fashion Muslim & Hijab', group: 'Fashion', keywords: ['Adem','Tidak Nerawang','Premium','Syari','Bahan Tebal','Halus','Anti Pilling','Voal','Ceruty'], longTail: ['tidak nerawang dan adem','cocok untuk daily','jatuh sempurna','tidak luntur'], badges: ['Premium','Best Seller','Adem & Tidak Nerawang'], tone: 'caring', emoji: ['🌸','✨','🤍','🌿'], benefitFallback: 'Adem, tidak nerawang, jatuh sempurna' },
+  fashion_anak: { label: 'Fashion Anak', group: 'Fashion', keywords: ['Lucu','Adem','Bahan Lembut','Cute','Premium','Tidak Bikin Gatal','Karakter'], longTail: ['bahan lembut di kulit anak','tidak bikin gatal','gambar tidak luntur'], badges: ['Lucu Banget','Bahan Lembut','Best Seller'], tone: 'caring', emoji: ['🧒','✨','💕','🌈'], benefitFallback: 'Bahan lembut, gambar lucu, nyaman dipakai anak' },
+  fashion_dalaman: { label: 'Underwear & Daleman', group: 'Fashion', keywords: ['Adem','Lembut','Premium','Nyaman','Bahan Katun','Tidak Gerah','Seamless'], longTail: ['bahan katun lembut','tidak meninggalkan bekas','adem dipakai seharian'], badges: ['Premium','Nyaman Dipakai'], tone: 'caring', emoji: ['🤍','✨','🌸'], benefitFallback: 'Bahan katun lembut, adem, nyaman seharian' },
+  makanan_frozen: { label: 'Frozen Food', group: 'Makanan', keywords: ['Halal','Higienis','Tanpa Pengawet','Premium','Daging Asli','Berkualitas','Hemat'], longTail: ['daging asli tanpa pengawet','praktis tinggal goreng','cocok stok di rumah','porsi besar hemat'], badges: ['Halal','Tanpa Pengawet','Best Seller'], tone: 'warm', emoji: ['🍗','🔥','😋','✨'], benefitFallback: 'Daging asli, halal, praktis tinggal goreng' },
+  makanan_snack: { label: 'Snack & Cemilan', group: 'Makanan', keywords: ['Renyah','Gurih','Halal','Homemade','Viral','Nagih','Bumbu Melimpah','Crunchy'], longTail: ['renyah sampai gigitan terakhir','bumbu meresap sempurna','cocok teman ngopi','bikin nagih'], badges: ['Viral','Best Seller','Halal'], tone: 'warm', emoji: ['🍿','🔥','😋','✨'], benefitFallback: 'Renyah, gurih, bumbu melimpah, bikin nagih' },
+  makanan_minuman: { label: 'Minuman', group: 'Makanan', keywords: ['Segar','Halal','Premium','Tanpa Pemanis Buatan','Viral','Kekinian','Hits'], longTail: ['segar di tenggorokan','cocok untuk cuaca panas','rasa autentik'], badges: ['Viral','Halal','Best Seller'], tone: 'warm', emoji: ['🥤','🧊','✨','😋'], benefitFallback: 'Segar, manis pas, halal, kekinian' },
+  makanan_homemade: { label: 'Catering & Homemade', group: 'Makanan', keywords: ['Halal','Homemade','Higienis','Bumbu Meresap','Premium','Fresh Daily','Resep Rumahan'], longTail: ['fresh dimasak hari itu juga','bumbu rumahan meresap','porsi mengenyangkan','cocok untuk acara'], badges: ['Halal','Homemade','Fresh Daily'], tone: 'warm', emoji: ['🍱','🔥','😋','🌿'], benefitFallback: 'Halal, homemade, bumbu rumahan meresap, fresh daily' },
+  elektronik_gadget: { label: 'HP & Gadget', group: 'Elektronik', keywords: ['Original','Garansi Resmi','Awet','Berkualitas','Fitur Lengkap','Battery Tahan Lama'], longTail: ['garansi resmi 1 tahun','spesifikasi mumpuni','baterai tahan seharian','sinyal stabil'], badges: ['Original','Garansi 1 Tahun','Best Quality'], tone: 'technical', emoji: ['📱','⚡','✨'], benefitFallback: 'Original, garansi resmi, spek mumpuni, awet' },
+  elektronik_aksesoris: { label: 'Aksesoris HP & Gadget', group: 'Elektronik', keywords: ['Original','Berkualitas','Awet','Premium','Anti Putus','Fast Charging'], longTail: ['fast charging stabil','kabel anti putus','cocok untuk semua tipe','fitting presisi'], badges: ['Original','Premium','Anti Putus'], tone: 'technical', emoji: ['🔌','⚡','✨'], benefitFallback: 'Original, awet, fitting presisi, fast charging' },
+  elektronik_rumah: { label: 'Elektronik Rumah Tangga', group: 'Elektronik', keywords: ['Hemat Listrik','Awet','Garansi','Berkualitas','Multifungsi','Mudah Dipakai'], longTail: ['hemat listrik watt rendah','mudah dibersihkan','garansi service resmi','tahan lama'], badges: ['Garansi Resmi','Hemat Listrik','Best Seller'], tone: 'technical', emoji: ['🏠','⚡','✨'], benefitFallback: 'Hemat listrik, awet, mudah dipakai, garansi resmi' },
+  kecantikan_skincare: { label: 'Skincare', group: 'Kecantikan', keywords: ['BPOM','Original','Aman','Halal','Glowing','Brightening','Natural','Dermatology Tested'], longTail: ['aman untuk kulit sensitif','sudah BPOM dan halal','tekstur ringan menyerap cepat','tidak bikin breakout'], badges: ['BPOM','Halal','Original'], tone: 'caring', emoji: ['✨','🌸','💕','🌿'], benefitFallback: 'BPOM, halal, aman untuk kulit sensitif, glowing' },
+  kecantikan_makeup: { label: 'Makeup', group: 'Kecantikan', keywords: ['BPOM','Original','Tahan Lama','Pigmented','Halal','Long Lasting','Smooth'], longTail: ['tahan seharian tanpa transfer','pigmentasi padat sekali oles','lightweight di wajah','sudah BPOM'], badges: ['BPOM','Halal','Long Lasting'], tone: 'caring', emoji: ['💄','✨','💕','🌸'], benefitFallback: 'BPOM, halal, tahan seharian, pigmentasi padat' },
+  kecantikan_hair: { label: 'Perawatan Rambut', group: 'Kecantikan', keywords: ['BPOM','Halal','Anti Rontok','Lembut','Shiny','Hair Tonic','Natural'], longTail: ['rambut lembut & shiny','mengurangi rontok dalam 2 minggu','tidak lengket di kulit kepala'], badges: ['BPOM','Halal','Anti Rontok'], tone: 'caring', emoji: ['💆‍♀️','✨','🌿','💕'], benefitFallback: 'BPOM, halal, anti rontok, rambut lembut shiny' },
+  rumah_perabot: { label: 'Perabot & Furniture', group: 'Rumah', keywords: ['Awet','Kokoh','Premium','Multifungsi','Hemat Tempat','Minimalis','Estetik'], longTail: ['rakitan kokoh anti goyang','desain minimalis hemat tempat','cocok untuk ruangan kecil','mudah dirakit'], badges: ['Premium','Kokoh','Best Seller'], tone: 'neutral', emoji: ['🏠','✨','🌿'], benefitFallback: 'Kokoh, minimalis, hemat tempat, mudah dirakit' },
+  rumah_dapur: { label: 'Peralatan Dapur', group: 'Rumah', keywords: ['Anti Karat','Stainless','Awet','Praktis','Multifungsi','Food Grade','Mudah Dibersihkan'], longTail: ['food grade aman untuk makanan','anti karat tahan bertahun-tahun','mudah dibersihkan','praktis dan multifungsi'], badges: ['Food Grade','Anti Karat','Multifungsi'], tone: 'neutral', emoji: ['🍳','✨','👌'], benefitFallback: 'Stainless food grade, anti karat, mudah dibersihkan' },
+  ibubayi_perlengkapan: { label: 'Perlengkapan Bayi', group: 'Ibu & Bayi', keywords: ['Aman','BPA Free','Lembut','Hypoallergenic','Newborn Friendly','Berkualitas','Premium'], longTail: ['BPA free aman untuk bayi','bahan lembut tidak iritasi','cocok untuk newborn','mudah dibersihkan'], badges: ['BPA Free','Hypoallergenic','Aman'], tone: 'caring', emoji: ['👶','🤍','🌿','💕'], benefitFallback: 'BPA Free, lembut, aman untuk newborn, hypoallergenic' },
+  ibubayi_mpasi: { label: 'MPASI & Makanan Bayi', group: 'Ibu & Bayi', keywords: ['Halal','Organik','Tanpa Pengawet','Aman','BPOM','Bergizi','Premium'], longTail: ['organik tanpa pengawet','bergizi seimbang untuk bayi','sudah BPOM dan halal','aman dari 6 bulan'], badges: ['BPOM','Halal','Organik'], tone: 'caring', emoji: ['🍼','🤍','🌿','💕'], benefitFallback: 'BPOM, halal, organik, bergizi seimbang' },
+  otomotif_motor: { label: 'Sparepart & Aksesoris Motor', group: 'Otomotif', keywords: ['Original','Awet','Berkualitas','Tahan Lama','Heavy Duty','Kuat'], longTail: ['original pabrikan','tahan untuk pemakaian harian','cocok untuk berbagai tipe motor','pemasangan presisi'], badges: ['Original','Heavy Duty','Awet'], tone: 'technical', emoji: ['🏍️','🔧','⚙️'], benefitFallback: 'Original, awet, presisi, cocok berbagai tipe' },
+  otomotif_mobil: { label: 'Sparepart & Aksesoris Mobil', group: 'Otomotif', keywords: ['Original','Heavy Duty','Awet','Berkualitas','OEM Quality','Tahan Lama'], longTail: ['OEM quality presisi','cocok untuk berbagai merk','pemasangan mudah','awet pemakaian harian'], badges: ['Original','OEM Quality','Heavy Duty'], tone: 'technical', emoji: ['🚗','🔧','⚙️'], benefitFallback: 'OEM quality, awet, presisi, pemasangan mudah' },
+  hobi_mainan: { label: 'Mainan & Hobi', group: 'Hobi', keywords: ['Original','Limited','Collector Item','Berkualitas','Edukatif','Premium','Aman'], longTail: ['original sertifikat asli','limited edition langka','edukatif merangsang kreativitas','aman untuk anak'], badges: ['Original','Limited Edition','Best Seller'], tone: 'playful', emoji: ['🎮','✨','🎯'], benefitFallback: 'Original, edukatif, aman, limited edition' },
+  hobi_tanaman: { label: 'Tanaman & Berkebun', group: 'Hobi', keywords: ['Segar','Sehat','Premium','Subur','Mudah Dirawat','Cocok Indoor'], longTail: ['daun segar tanpa hama','mudah dirawat untuk pemula','cocok untuk indoor maupun outdoor','akar kuat'], badges: ['Segar','Bibit Unggul'], tone: 'caring', emoji: ['🌿','🌱','✨'], benefitFallback: 'Segar, akar kuat, mudah dirawat, cocok indoor' },
+  hobi_petshop: { label: 'Hewan Peliharaan', group: 'Hobi', keywords: ['Premium','Halal','Bergizi','Aman','Vitamin Lengkap','Berkualitas'], longTail: ['gizi seimbang untuk peliharaan','aman untuk semua usia','vitamin lengkap menjaga kesehatan'], badges: ['Premium','Bergizi','Aman'], tone: 'caring', emoji: ['🐾','✨','💕'], benefitFallback: 'Premium, bergizi seimbang, aman untuk peliharaan' },
+  aksesoris_perhiasan: { label: 'Aksesoris & Perhiasan', group: 'Aksesoris', keywords: ['Stainless','Anti Karat','Kekinian','Estetik','Premium','Couple','Adjustable'], longTail: ['stainless anti karat','tidak bikin alergi','cocok untuk daily','kado spesial'], badges: ['Anti Karat','Premium','Kado Spesial'], tone: 'trendy', emoji: ['✨','💫','💕'], benefitFallback: 'Stainless anti karat, kekinian, cocok untuk kado' },
+  aksesoris_tas: { label: 'Tas & Dompet', group: 'Aksesoris', keywords: ['Premium','Kulit Sintetis','Muat Banyak','Estetik','Tahan Lama','Anti Air'], longTail: ['muat laptop dan barang lainnya','kulit sintetis premium','jahitan rapi','cocok untuk daily'], badges: ['Premium','Best Seller','Anti Air'], tone: 'trendy', emoji: ['👜','✨','💫'], benefitFallback: 'Premium, muat banyak, jahitan rapi, anti air' },
+  digital_voucher: { label: 'Pulsa & Voucher Digital', group: 'Digital', keywords: ['Termurah','Cepat','Resmi','Auto Proses','Garansi','24 Jam'], longTail: ['proses cepat 1-3 menit','garansi 100% masuk','admin standby 24 jam','harga termurah'], badges: ['Resmi','Auto Proses','Garansi'], tone: 'neutral', emoji: ['📱','⚡','✅'], benefitFallback: 'Resmi, proses cepat, garansi 100%, 24 jam' },
+  herbal_jamu: { label: 'Herbal & Jamu', group: 'Kesehatan', keywords: ['Halal','Alami','BPOM','Tradisional','Tanpa Bahan Kimia','Berkhasiat'], longTail: ['bahan alami tradisional','sudah BPOM dan halal','tanpa bahan kimia berbahaya','khasiat turun temurun'], badges: ['BPOM','Halal','Alami'], tone: 'caring', emoji: ['🌿','✨','🤍'], benefitFallback: 'BPOM, halal, bahan alami, khasiat tradisional' },
+  lainnya: { label: 'Lainnya', group: 'Lainnya', keywords: ['Premium','Berkualitas','Original','Best Seller','Recommended','Awet'], longTail: ['kualitas terjamin','recommended untuk daily','awet dan tahan lama'], badges: ['Best Seller','Premium','Recommended'], tone: 'neutral', emoji: ['✨','👌'], benefitFallback: 'Berkualitas, awet, recommended' },
+};
+
+/* ---------- Auto-detect kategori ---------- */
+const DETECTOR = [
+  { kat: 'makanan_frozen', kw: ['frozen','nugget','sosis','bakso','dimsum','siomay','kentang','fries','beku'] },
+  { kat: 'makanan_snack', kw: ['keripik','kerupuk','cemilan','snack','cookies','biskuit','kacang','makaroni','basreng','cilok'] },
+  { kat: 'makanan_minuman', kw: ['kopi','teh','jus','minuman','sirup','boba','thai tea','matcha','soda','lemon'] },
+  { kat: 'makanan_homemade', kw: ['nasi','mie','ayam','rendang','sambal','catering','lauk','makan siang','bekal','rice bowl','soto','rawon','gudeg'] },
+  { kat: 'fashion_hijab', kw: ['hijab','kerudung','jilbab','pashmina','gamis','khimar','mukena','voal','ceruty'] },
+  { kat: 'fashion_anak', kw: ['anak','kids','baby','balita','bayi laki','bayi perempuan'] },
+  { kat: 'fashion_dalaman', kw: ['bra','bh','celana dalam','cd','underwear','panty','kaos kaki','singlet'] },
+  { kat: 'fashion_pria', kw: ['kemeja pria','celana pria','kaos pria','jaket pria','sandal pria','sepatu pria','distro'] },
+  { kat: 'fashion_wanita', kw: ['dress','rok','blouse','tunik','kebaya','baju wanita','celana wanita','kaos wanita','kaftan'] },
+  { kat: 'elektronik_gadget', kw: ['hp','handphone','smartphone','iphone','samsung','xiaomi','oppo','vivo','tablet','laptop'] },
+  { kat: 'elektronik_aksesoris', kw: ['charger','kabel data','powerbank','headset','earphone','tws','casing','tempered','holder hp','speaker bluetooth'] },
+  { kat: 'elektronik_rumah', kw: ['kipas','rice cooker','magic com','blender','mixer','setrika','kulkas','mesin cuci','dispenser'] },
+  { kat: 'kecantikan_skincare', kw: ['serum','moisturizer','toner','sunscreen','sabun wajah','masker wajah','pembersih','skincare','cream wajah'] },
+  { kat: 'kecantikan_makeup', kw: ['lipstik','lip','foundation','bedak','eyeliner','mascara','blush','cushion','eyeshadow','highlighter'] },
+  { kat: 'kecantikan_hair', kw: ['shampoo','conditioner','hair tonic','hair oil','pomade','cat rambut','serum rambut','masker rambut'] },
+  { kat: 'rumah_dapur', kw: ['panci','wajan','sendok','piring','gelas','mangkok','pisau','talenan','spatula','teflon','rice box'] },
+  { kat: 'rumah_perabot', kw: ['kasur','bantal','seprai','meja','kursi','lemari','rak','sofa','gorden','karpet'] },
+  { kat: 'ibubayi_mpasi', kw: ['mpasi','sufor','susu bayi','biskuit bayi','puff bayi','bubur bayi','snack bayi'] },
+  { kat: 'ibubayi_perlengkapan', kw: ['popok','diaper','botol bayi','dot','stroller','gendongan','bedong','baby carrier','mainan bayi'] },
+  { kat: 'otomotif_motor', kw: ['helm','spion motor','jok motor','oli motor','ban motor','lampu motor','sparepart motor'] },
+  { kat: 'otomotif_mobil', kw: ['ban mobil','oli mobil','wiper','parfum mobil','cover mobil','sparepart mobil','aki mobil'] },
+  { kat: 'hobi_tanaman', kw: ['tanaman','bunga','pot','pupuk','bibit','kaktus','sukulen','monstera','aglonema'] },
+  { kat: 'hobi_petshop', kw: ['kucing','anjing','pakan kucing','pasir kucing','mainan kucing','cat food','dog food','akuarium','ikan hias','cupang'] },
+  { kat: 'hobi_mainan', kw: ['mainan','lego','puzzle','action figure','gundam','rc car','edukasi','boneka'] },
+  { kat: 'aksesoris_tas', kw: ['tas','dompet','ransel','tote bag','sling bag','backpack','pouch'] },
+  { kat: 'aksesoris_perhiasan', kw: ['cincin','kalung','gelang','anting','liontin','jam tangan'] },
+  { kat: 'digital_voucher', kw: ['pulsa','paket data','voucher game','diamond','top up','mobile legend','free fire','genshin'] },
+  { kat: 'herbal_jamu', kw: ['jamu','herbal','madu','minyak kayu putih','minyak telon','kapsul','jahe','kunyit'] },
+];
+function detectCategory(name) {
+  const q = (name || '').toLowerCase();
+  if (!q.trim()) return null;
+  let best = { kat: null, score: 0 };
+  for (const d of DETECTOR) {
+    for (const kw of d.kw) {
+      if (q.includes(kw) && kw.length > best.score) best = { kat: d.kat, score: kw.length };
+    }
+  }
+  return best.kat;
+}
+
+/* ---------- Title formulas ---------- */
+const TITLE_FORMULAS = [
+  ({ p, k, b, year }) => `${b[0]} ${p} ${k[0]} ${k[1]} - Ready Stock COD`,
+  ({ p, k }) => `PROMO ${p} ${k[0]} ${k[1]} Free Ongkir Murah`,
+  ({ p, k, year }) => `${p} ${k[0]} ${k[1]} Terlaris ${year}`,
+  ({ p, k, b }) => `${p} ${b[0]} ${k[0]} - Garansi 100% ${k[1]}`,
+  ({ p, k }) => `Jual ${p} Murah ${k[0]} ${k[1]} Bisa COD Free Ongkir`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} Best Seller Recommended`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} - Stok Terbatas Buruan Order`,
+  ({ p, k, b }) => `${b[0]} ${p} ${k[0]} ${k[1]} Kualitas Toko`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} Harga Pabrik Langsung Kirim`,
+  ({ p, k }) => `${p} Premium ${k[0]} ${k[1]} - Bisa COD Seluruh Indonesia`,
+  ({ p, k }) => `${p} ${k[0]} Asli ${k[1]} Garansi Toko`,
+  ({ p, k }) => `${p} Viral ${k[0]} ${k[1]} TikTok Lagi Hits`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} - Diskon Hari Ini Saja`,
+  ({ p, k }) => `${p} ${k[0]} Terbaru ${k[1]} Stock Banyak`,
+  ({ p, k, b }) => `${p} ${k[0]} ${k[1]} - ${b[0]} Ada Garansi`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} Cod Bisa Cek Dulu`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} Recommended Pembeli Puas`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} Ready Banyak Warna/Ukuran`,
+  ({ p, k, year }) => `${p} ${k[0]} ${k[1]} Model Terbaru ${year}`,
+  ({ p, k }) => `${p} ${k[0]} ${k[1]} - Kualitas Premium Harga Murah`,
+];
+function generateTitles(name, catKey) {
+  const product = (name || '').trim();
+  if (!product) return [];
+  const cat = CATEGORIES[catKey] || CATEGORIES.lainnya;
+  const year = new Date().getFullYear();
+  const formulas = pickN(TITLE_FORMULAS, 8);
+  const seen = new Set();
+  const out = [];
+  for (const f of formulas) {
+    const k = shuffle(cat.keywords);
+    const b = shuffle(cat.badges);
+    let t = f({ p: product, k, b, year }).replace(/\s+/g, ' ').trim();
+    if (t.length > 90) t = t.slice(0, 87).trim() + '...';
+    const key = t.toLowerCase();
+    if (!seen.has(key)) { seen.add(key); out.push(t); }
+  }
+  return out.slice(0, 8);
+}
+
+function generateKeywords(name, catKey) {
+  const product = (name || '').trim().toLowerCase();
+  if (!product) return [];
+  const cat = CATEGORIES[catKey] || CATEGORIES.lainnya;
+  const base = [product, `${product} murah`, `${product} original`, `jual ${product}`, `${product} ready stock`, `${product} cod`, `${product} terlaris`];
+  const longTail = (cat.longTail || []).slice(0, 4).map(lt => `${product} ${lt}`);
+  const month = new Date().getMonth();
+  const seasonal = [];
+  if (month >= 2 && month <= 4) seasonal.push(`${product} lebaran`, `${product} hampers`);
+  if (month >= 10) seasonal.push(`${product} natal`, `${product} kado tahun baru`);
+  return Array.from(new Set([...base, ...longTail, ...seasonal])).slice(0, 12);
+}
+
+/* ---------- Caption tone bank ---------- */
+const TONE_BANK = {
+  trendy: { opening: ['Lagi cari yang kekinian?','Buat yang demen tampil beda,','Outfit/aksesoris incaran udah ketemu nih,','Yang lagi hits sekarang,','Buat kamu yang anti pasaran,'], cta: ['Yuk checkout sebelum kehabisan!','Buruan order, stok cepat habis!','Klik keranjang sekarang ✨','DM untuk tanya-tanya ya!'], closing: ['Stay stylish! ✨','Let\u2019s glow up! 💫','See you di paket! 💕'] },
+  caring: { opening: ['Halo Bun, Sis, Kak,','Buat yang lagi nyari yang aman & berkualitas,','Kabar baik buat kamu,','Mau yang nyaman dipakai sehari-hari?','Buat keluarga tersayang di rumah,'], cta: ['Yuk dipesan dulu sebelum kehabisan ya 🌿','Tinggal klik keranjang, kami bantu sampai rumah ✨','Order sekarang, kirim hari ini juga 💕','DM untuk konsultasi dulu, gratis kok!'], closing: ['Semoga membantu ya 🌿','Sehat selalu untuk keluarga 💕','Terima kasih sudah mampir 🤍'] },
+  warm: { opening: ['Lagi laper? Cobain ini deh,','Yang udah cobain pada balik lagi nih,','Bikin nagih dari gigitan pertama,','Cocok banget buat camilan hari ini,','Recommended buat kamu yang suka rasa autentik,'], cta: ['Yuk pesan sekarang sebelum kehabisan! 🔥','Order yuk, kirim cepat dijamin masih fresh!','Tinggal chat, kami siapkan langsung 😋','Stok terbatas, buruan order!'], closing: ['Selamat menikmati! 😋','Selamat makan ya! 🔥','Cobain dan rasakan bedanya 🌿'] },
+  technical: { opening: ['Buat yang butuh kualitas terjamin,','Cari yang awet & garansi resmi?','Spesifikasi lengkap, harga bersaing,','Solusi untuk kebutuhan harian kamu,','Yang mencari produk original, mampir dulu,'], cta: ['Order sekarang, garansi resmi.','Stok terbatas, segera checkout.','DM untuk info spesifikasi lebih detail.','Klik keranjang, langsung diproses.'], closing: ['Garansi resmi, terima kasih.','Toko terpercaya sejak lama.','Cek toko untuk produk lainnya.'] },
+  playful: { opening: ['Stop scrolling sebentar, ini wajib dilihat!','Buat para kolektor & hobiis,','Item langka muncul lagi nih!','Yang udah lama nyari, ini dia!','Restock terbatas, jangan sampai kelewat!'], cta: ['Buruan checkout sebelum kehabisan!','Klik keranjang sekarang juga!','DM untuk tanya stok ya!','Order sekarang, dikirim hari ini!'], closing: ['Happy hunting! 🎯','Selamat berburu! ✨','Sampai jumpa di paket!'] },
+  neutral: { opening: ['Halo, kabar baik untuk kamu,','Lagi cari yang berkualitas dengan harga ramah?','Terima kasih sudah mampir,','Buat kebutuhan harian kamu,','Recommended dari pelanggan kami,'], cta: ['Yuk dipesan sekarang!','Klik keranjang untuk order.','DM untuk tanya-tanya ya.','Stok terbatas, segera checkout.'], closing: ['Terima kasih 🌿','Salam dari kami ✨','Sampai jumpa di paket!'] },
+};
+
+function buildHashtags(name, cat) {
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const tags = [`#${slug}`, '#readystock', '#jualanonline'];
+  if (cat.group === 'Fashion') tags.push('#ootd', '#fashion');
+  if (cat.group === 'Makanan') tags.push('#kuliner', '#wajibcoba');
+  if (cat.group === 'Elektronik') tags.push('#gadget', '#original');
+  if (cat.group === 'Kecantikan') tags.push('#skincare', '#bpom');
+  if (cat.group === 'Ibu & Bayi') tags.push('#mombaby', '#newbornfriendly');
+  if (cat.group === 'Otomotif') tags.push('#otomotif', '#sparepart');
+  if (cat.group === 'Hobi') tags.push('#hobi', '#collectoritem');
+  if (cat.group === 'Aksesoris') tags.push('#accessories', '#kado');
+  if (tags.length < 5) tags.push('#cod', '#freeongkir');
+  return pickN(tags, 5).join(' ');
+}
+
+function buildCaption(mode, { product, harga, benefit, categoryKey }) {
+  const cat = CATEGORIES[categoryKey] || CATEGORIES.lainnya;
+  const tone = TONE_BANK[cat.tone] || TONE_BANK.neutral;
+  const p = (product || '').trim() || 'Produk Andalan';
+  const b = (benefit || '').trim() || cat.benefitFallback;
+  const h = harga ? formatRupiah(parseNumber(harga)) : null;
+  const e = cat.emoji;
+  const opening = rand(tone.opening);
+  const cta = rand(tone.cta);
+  const closing = rand(tone.closing);
+  const hashtags = buildHashtags(p, cat);
+
+  if (mode === 'promo') {
+    return rand([
+`${e[0]} PROMO SPESIAL HARI INI ${e[0]}
+
+${opening} ${p} lagi promo nih!
+
+${e[1]} ${b}
+${h ? `${e[2]} Harga PROMO: ${h}` : `${e[2]} Harga PROMO terbaik!`}
+${e[3] || '✅'} Ready Stock — siap kirim hari ini
+${e[4] || '🚚'} Free Ongkir wilayah tertentu
+${e[0]} Bisa COD se-Indonesia
+
+⏰ Stok terbatas, promo cuma hari ini!
+${cta}
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`,
+
+`🎉 ${p.toUpperCase()} — DISKON SPESIAL!
+
+${opening}
+
+✨ ${b}
+${h ? `💸 Diskon hari ini: ${h}` : `💸 Diskon spesial — cek toko ya!`}
+✅ Ready stock, dikirim hari ini
+✅ Bisa COD seluruh Indonesia
+✅ Free ongkir minimum tertentu
+
+⏰ Promo cuma hari ini, jangan sampai kelewat!
+${cta}
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`,
+
+`${e[0]} FLASH SALE — ${p} ${e[0]}
+
+${opening}
+
+${b}.
+
+${h ? `Harga normal dicoret 💸\nHari ini cuma: ${h}` : `Harga jauh lebih murah dari biasanya!`}
+
+✅ Ready stock siap kirim
+✅ Bergaransi & dijamin original
+✅ COD & semua e-wallet aktif
+
+🚨 Stok TERBATAS — first come first served!
+${cta}
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`
+    ]);
+  }
+
+  if (mode === 'soft') {
+    return rand([
+`${opening}
+
+Dulu aku juga sempat bingung nyari ${p.toLowerCase()} yang pas. Sampai akhirnya ketemu yang ini ${e[0]}
+
+${b}.
+
+Yang udah cobain banyak yang balik lagi, bukan karena gimmick — tapi emang nyaman dipakai sehari-hari ${e[2] || '💕'}
+
+${h ? `Sekarang lagi ada harga spesial: ${h}.` : 'Harganya juga masih sangat ramah di kantong.'}
+Kalau penasaran, mampir aja ke katalog ya 👆
+
+${closing}
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`,
+
+`${opening}
+
+Pernah gak ngerasa, kadang barang biasa aja tapi pas di tangan rasanya beda? ${p} ini gitu rasanya.
+
+${b}.
+
+Bukan janji manis — tapi pengalaman dari pelanggan kami yang udah balik lagi berkali-kali ${e[0]}
+
+${h ? `Kalau mau cobain, sekarang ada di harga ${h}.` : 'Harga ramah, kualitas premium.'}
+Selamat menemukan yang cocok ya ${e[2] || '🌿'}
+
+${closing}
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`,
+
+`${opening}
+
+Ada cerita kecil dari pelanggan kemarin: katanya ${p.toLowerCase()} ini bikin daily routine-nya jadi lebih simpel.
+
+Kenapa? Karena ${b.toLowerCase()}.
+
+Hal sederhana, tapi ngebantu banget. Itu yang bikin kami terus restock produk ini ${e[0]}
+
+${h ? `Saat ini tersedia di harga ${h}.` : 'Harga bersahabat untuk kualitas yang seperti ini.'}
+Mungkin cocok juga buat kamu ${e[2] || '💕'}
+
+${closing}
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`
+    ]);
+  }
+
+  if (mode === 'hard') {
+    return rand([
+`STOP SCROLL DULU! 🛑
+
+Kamu butuh ${p}? INI dia jawabannya!
+
+✅ ${b}
+✅ Ready stock — kirim hari ini
+✅ Garansi uang kembali kalau tidak sesuai
+✅ Sudah dipakai ribuan pembeli puas
+
+${h ? `💸 HARGA NORMAL dicoret\n💰 HARI INI CUMA: ${h}` : '💰 Harga jauh lebih murah dari toko sebelah!'}
+
+⚠️ STOK TINGGAL SEDIKIT!
+👉 ${cta}
+👉 Klik link di bio atau DM "ORDER"
+
+Jangan tunggu sampai harga naik 🚨
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`,
+
+`🚨 KESEMPATAN TERAKHIR — ${p.toUpperCase()} 🚨
+
+Kalau kamu masih ragu, bacalah ini:
+
+✅ ${b}
+✅ Sudah laku ribuan unit & rating 4.9
+✅ Garansi pembeli aman 100%
+✅ Kirim cepat seluruh Indonesia
+
+${h ? `Harga sekarang: ${h} (sebelum naik!)` : 'Harga lagi turun — manfaatkan sekarang!'}
+
+⏰ Promo TIDAK AKAN diulang!
+👉 ${cta}
+👉 DM "ORDER" untuk dibantu langsung
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`,
+
+`🔥 ${p.toUpperCase()} — ORDER SEKARANG! 🔥
+
+Yang masih nunggu, nunggu apa lagi?
+
+✅ ${b}
+✅ Stok TERAKHIR — restock belum tentu
+✅ Garansi 100% original
+✅ COD seluruh Indonesia
+
+${h ? `Harga: ${h} — tidak ada lagi yang lebih murah!` : 'Harga LANGSUNG dari supplier — bandingkan deh!'}
+
+⏰ Yang udah keranjangin, CHECKOUT SEKARANG!
+👉 ${cta}
+
+${hashtags}
+
+— dibuat dengan Alat Jualan`
+    ]);
+  }
+
+  if (mode === 'wa') {
+    const hour = new Date().getHours();
+    const greet = hour < 12 ? 'pagi' : hour < 15 ? 'siang' : hour < 18 ? 'sore' : 'malam';
+    return rand([
+`Halo Kak 👋
+
+Kabar baik buat Kakak yang lagi cari ${p.toLowerCase()}!
+
+${p} kami sekarang lagi PROMO SPESIAL 🎉
+
+${e[0]} ${b}
+${h ? `💰 Harga spesial: ${h}` : '💰 Harga spesial khusus member'}
+✅ Ready Stock
+✅ Bisa COD se-Indonesia
+✅ Free Ongkir wilayah tertentu
+
+Mau Kak? Reply pesan ini ketik "MAU" ya 😊
+Nanti dibantu sampai selesai order.
+
+Terima kasih Kak, semoga harimu menyenangkan! ${e[2] || '🌿'}
+
+— dibuat dengan Alat Jualan`,
+
+`Selamat ${greet} Kak 🌿
+
+Maaf mengganggu sebentar. Kakak yang dulu pernah tanya soal ${p.toLowerCase()}, ini ada update penting:
+
+${e[0]} Stok BARU sudah datang
+${e[1]} ${b}
+${h ? `${e[2] || '💰'} Harga sekarang: ${h}` : `${e[2] || '💰'} Harga lagi spesial`}
+
+Kalau Kakak masih minat, bisa langsung balas pesan ini ya. Kami siapkan untuk Kakak.
+
+Terima kasih banyak Kak ${e[3] || '🤍'}
+
+— dibuat dengan Alat Jualan`,
+
+`Halo Kak ${e[0]}
+
+Hari ini ada kabar baik nih buat Kakak:
+
+${p} → ${b}
+${h ? `Harga hari ini: ${h}` : 'Harga lagi turun'}
+
+Yang biasanya repeat order, hari ini bisa hemat lebih banyak.
+
+Jika Kakak mau, cukup balas pesan ini ketik "ORDER" — kami siapkan langsung.
+Stok terbatas, dahulu-dahuluan ya Kak 🌿
+
+Terima kasih banyak Kak!
+
+— dibuat dengan Alat Jualan`
+    ]);
+  }
+
+  return rand([
+`🎬 SKRIP LIVE SELLING — ${p.toUpperCase()}
+
+[OPENING — 30 detik]
+"Halo semuanya! Selamat datang yang baru gabung di live aku!
+Yang udah follow, kasih emoji ❤️ di chat ya!
+Hari ini aku bawa produk yang LAGI HITS BANGET, namanya ${p}!"
+
+[HOOK — Kenapa harus beli?]
+"${b}.
+Jadi ini cocok BANGET buat kalian yang...
+- mau hasil maksimal tanpa ribet
+- nggak mau buang waktu nyari produk lain
+- pengen dapet harga terbaik LANGSUNG dari sumbernya"
+
+[OFFER — Harga & Promo]
+${h ? `"Harga normalnya bisa lebih mahal, tapi KHUSUS di live ini AJA, kalian bisa dapetin cuma ${h}!"` : `"KHUSUS di live ini AJA, harga jauh lebih murah dari yang ada di toko!"`}
+
+[URGENCY — Tutup penjualan]
+"Stok tinggal SEDIKIT ya, yang udah keranjangin LANGSUNG checkout sebelum diambil orang lain!
+Ketik 'ORDER' di chat kalau mau dibantu!"
+
+[CLOSING]
+"Terima kasih udah nonton sampai akhir! Jangan lupa follow biar nggak ketinggalan promo berikutnya!"
+
+— dibuat dengan Alat Jualan`,
+
+`🎬 SKRIP LIVE SELLING — ${p.toUpperCase()}
+
+[SAPAAN HANGAT — 20 detik]
+"Halooo! Apa kabar semua? Yang baru join, salam kenal ya!
+Sambil kalian datang, aku siapin produk hari ini..."
+
+[STORYTELLING — kenalkan produk]
+"Jadi gini, banyak banget yang DM aku nanyain ${p.toLowerCase()}. Akhirnya hari ini aku siapin khusus buat kalian.
+Kenapa produk ini? Karena ${b.toLowerCase()}."
+
+[DEMO + INTERAKSI]
+"Coba kalian lihat detailnya nih (perlihatkan produk).
+Yang udah pernah pakai, komen di chat dong, gimana pengalamannya?"
+
+[OFFER]
+${h ? `"Harga KHUSUS LIVE hari ini: ${h}. Cuma di live ini lho ya!"` : `"Harga LIVE hari ini auto cuan, cek deh harga di toko sebelah."`}
+
+[CALL TO ACTION]
+"Yang minat, ketik 'BOOK' di chat. Admin standby siap bantu kalian!
+Stok terbatas — siapa cepat dia dapat ya!"
+
+[CLOSING]
+"Makasih banyak ya teman-teman! Yang belum follow, follow dulu biar gak ketinggalan live berikutnya!"
+
+— dibuat dengan Alat Jualan`
+  ]);
+}
+
+/* ---------- Profit calc ---------- */
+function computeProfit({ modal, ongkir, packing, iklan, diskon, feePct, marginPct }) {
+  const totalCost = modal + ongkir + packing + iklan;
+  const targetProfit = (totalCost * marginPct) / 100;
+  const denom = 1 - feePct / 100;
+  const idealPriceRaw = denom > 0 ? (totalCost + targetProfit + diskon) / denom : 0;
+  const idealPrice = Math.ceil(idealPriceRaw / 1000) * 1000;
+  const feeAmount = (idealPrice * feePct) / 100;
+  const netProfit = idealPrice - feeAmount - diskon - totalCost;
+  const realMargin = idealPrice > 0 ? (netProfit / idealPrice) * 100 : 0;
+  return { totalCost, idealPrice, netProfit, realMargin, feeAmount };
+}
+
+/* ---------- Clipboard + Share ---------- */
+let toastTimer;
+function showToast(msg) {
+  document.querySelectorAll('.toast').forEach(el => el.remove());
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `${ICONS.check_white} ${msg}`;
+  document.body.appendChild(t);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.remove(), 1800);
+}
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch {}
+    document.body.removeChild(ta);
+  }
+  showToast('Tersalin!');
+}
+async function shareText(text) {
+  try {
+    if (navigator.share) { await navigator.share({ title: 'Alat Jualan', text }); return; }
+  } catch {}
+  copyText(text);
+}
+
+/* ---------- Inline SVG icons (Lucide-style) ---------- */
+const SVG = (path, size = 16) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+const ICONS = {
+  bag: SVG('<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>', 16),
+  arrowRight: SVG('<path d="M5 12h14M13 5l7 7-7 7"/>', 14),
+  arrowLeft: SVG('<path d="M19 12H5M12 19l-7-7 7-7"/>', 16),
+  calculator: SVG('<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/>', 24),
+  sparkles: SVG('<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>', 24),
+  message: SVG('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>', 24),
+  copy: SVG('<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>', 14),
+  check: SVG('<polyline points="20 6 9 17 4 12"/>', 14),
+  check_white: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  share: SVG('<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/>', 14),
+  refresh: SVG('<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/>', 14),
+  wand: SVG('<path d="m21 21-9.5-9.5"/><path d="m21 3-9 9"/><path d="m15 3 6 6"/><path d="m3 9 6-6"/><path d="m3 21 9-9"/>', 16),
+  trending: SVG('<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>', 16),
+  receipt: SVG('<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>', 20),
+  megaphone: SVG('<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>', 20),
+  tag: SVG('<path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" x2="7.01" y1="7" y2="7"/>', 14),
+  heart: SVG('<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>', 14),
+  zap: SVG('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>', 14),
+  send: SVG('<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>', 14),
+  radio: SVG('<path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>', 14),
+  bulb: SVG('<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>', 16),
+  alert: SVG('<circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/>', 16),
+};
+
+/* ============================================================
+   STATE & ROUTING
+   ============================================================ */
+const state = {
+  view: 'home',
+  // calculator
+  modal: 50000, ongkir: 0, packing: 2000, iklan: 0, diskon: 0, feePct: 8, marginPct: 40,
+  // title
+  titleProduct: '', titleCategory: 'fashion_wanita', titleGenerated: false, titleSeed: 0,
+  // caption
+  capMode: 'promo', capProduct: '', capCategory: 'lainnya', capHarga: 0, capBenefit: '',
+  capGenerated: false, capSeed: 0,
+};
+
+function navigate(view) {
+  state.view = view;
+  const titles = {
+    home: 'Alat Jualan — by Legacya Sphere',
+    calc: 'Kalkulator Untung • Alat Jualan',
+    title: 'Pembuat Judul Produk • Alat Jualan',
+    caption: 'Pembuat Caption Jualan • Alat Jualan',
+  };
+  document.title = titles[view] || titles.home;
+  history.replaceState(null, '', `#${view === 'home' ? '' : view}`);
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.addEventListener('hashchange', () => {
+  const v = (location.hash || '#home').slice(1) || 'home';
+  if (['home','calc','title','caption'].includes(v) && v !== state.view) {
+    state.view = v; render();
+  }
+});
+
+/* ============================================================
+   COMPONENTS (string templates)
+   ============================================================ */
+
+function Header() {
+  return `
+    <header class="header">
+      <div class="header-inner">
+        <button class="logo" data-nav="home">
+          <span class="logo-mark">${ICONS.bag}</span>
+          <span><span class="logo-name">Alat Jualan</span></span>
+        </button>
+        <a class="header-link" href="https://legacyasphere.id" target="_blank" rel="noopener">Legacya Sphere ${ICONS.arrowRight}</a>
+      </div>
+    </header>
+  `;
+}
+
+function Footer() {
+  return `
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="logo">
+          <span class="logo-mark">${ICONS.bag}</span>
+          <span><span class="logo-name">Alat Jualan</span></span>
+        </div>
+        <div>
+          <div class="footer-text">© ${new Date().getFullYear()} Legacya Sphere. Untuk UMKM Indonesia 🌾</div>
+          <a class="footer-link" href="https://legacyasphere.id" target="_blank" rel="noopener">legacyasphere.id</a>
+        </div>
+      </div>
+    </footer>
+  `;
+}
+
+function HomePage() {
+  const tools = [
+    { key: 'calc', icon: ICONS.calculator, title: 'Kalkulator Untung', desc: 'Hitung harga jual ideal & profit bersih dalam hitungan detik.', color: 'var(--clay)' },
+    { key: 'title', icon: ICONS.sparkles, title: 'Pembuat Judul Produk', desc: '8 judul SEO + saran keyword, otomatis sesuai kategori produkmu.', color: 'var(--sage-dark)' },
+    { key: 'caption', icon: ICONS.message, title: 'Pembuat Caption Jualan', desc: '5 gaya caption: Promo, Soft, Hard, WA, Live — siap copy-paste.', color: 'var(--rust)' },
+  ];
+  const benefits = [
+    { icon: ICONS.receipt, title: 'Hitung untung otomatis', desc: 'Tidak perlu kalkulator atau Excel. Cukup isi modal dan biaya, hasil keluar otomatis.' },
+    { icon: ICONS.trending, title: 'Bantu produk lebih laku', desc: 'Judul SEO bantu produkmu naik di pencarian Shopee, Tokopedia, dan TikTok Shop.' },
+    { icon: ICONS.megaphone, title: 'Caption siap pakai', desc: 'Tinggal copy-paste ke Instagram, WA, atau TikTok. Hemat waktu, lebih konsisten.' },
+  ];
+
+  return `
+    <section class="hero">
+      <div class="container">
+        <div class="pill"><span class="pill-dot"></span> Untuk UMKM, reseller, & seller marketplace</div>
+        <h1 class="hero-title">Alat Jualan</h1>
+        <p class="hero-sub">
+          Bantu jualan online lebih <em class="em-clay">mudah</em>,
+          lebih <em class="em-clay">cepat</em>,
+          dan lebih <em class="em-sage">untung</em>.
+        </p>
+        <div class="hero-cta">
+          <button class="btn-primary" data-nav="calc">${ICONS.wand} Mulai Pakai Gratis</button>
+          <button class="btn-ghost" data-nav="caption">Lihat Caption Generator</button>
+        </div>
+        <div class="hero-note">Tanpa daftar • Tanpa login • 100% gratis</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-eyebrow">3 Tools Utama</div>
+        <h2 class="section-title">Pilih alat yang kamu butuhkan</h2>
+        <div class="tools-grid">
+          ${tools.map(t => `
+            <button class="tool-card" data-nav="${t.key}">
+              <div class="tool-icon" style="color: ${t.color};">${t.icon}</div>
+              <h3 class="tool-title">${t.title}</h3>
+              <p class="tool-desc">${t.desc}</p>
+              <span class="tool-cta" style="color: ${t.color};">Buka alat ${ICONS.arrowRight}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section benefits-bg">
+      <div class="container">
+        <div class="section-eyebrow">Manfaat</div>
+        <h2 class="section-title">Lebih hemat waktu, lebih banyak orderan</h2>
+        <div class="benefits-grid">
+          ${benefits.map(b => `
+            <div>
+              <div class="benefit-icon">${b.icon}</div>
+              <h3 class="benefit-title">${b.title}</h3>
+              <p class="benefit-desc">${b.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="bottom-cta">
+          <h2>Mulai sekarang, jualan lebih mudah.</h2>
+          <p>Tidak ada langganan, tidak ada batasan. Pilih satu alat dan langsung dipakai.</p>
+          <div class="bottom-cta-btns">
+            <button class="bottom-cta-btn-light" data-nav="calc">Hitung Untung</button>
+            <button class="bottom-cta-btn-line" data-nav="title">Bikin Judul Produk</button>
+            <button class="bottom-cta-btn-line" data-nav="caption">Bikin Caption</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function categorySelectHTML(value, suggestion) {
+  const groups = {};
+  Object.entries(CATEGORIES).forEach(([k, v]) => {
+    if (!groups[v.group]) groups[v.group] = [];
+    groups[v.group].push({ k, label: v.label });
+  });
+  const showSuggest = suggestion && suggestion !== value;
+  return `
+    <div>
+      <select class="input-select" data-cat-select>
+        ${Object.entries(groups).map(([g, items]) => `
+          <optgroup label="${g}">
+            ${items.map(it => `<option value="${it.k}" ${it.k === value ? 'selected' : ''}>${it.label}</option>`).join('')}
+          </optgroup>
+        `).join('')}
+      </select>
+      ${showSuggest ? `
+        <button class="panel-warn" data-cat-suggest="${suggestion}">
+          <span style="color: var(--warn); margin-top: 1px;">${ICONS.bulb}</span>
+          <span style="font-size: 12px; line-height: 1.5;">
+            Sepertinya produk ini lebih cocok di kategori
+            <strong style="color: var(--warn);">${CATEGORIES[suggestion].label}</strong>.
+            <span style="color: var(--clay-dark); font-weight: 600;">Pakai itu?</span>
+          </span>
+        </button>
+      ` : ''}
+    </div>
+  `;
+}
+
+/* ---------- CALCULATOR PAGE ---------- */
+function CalcPage() {
+  const r = computeProfit({ modal: state.modal, ongkir: state.ongkir, packing: state.packing, iklan: state.iklan, diskon: state.diskon, feePct: state.feePct, marginPct: state.marginPct });
+  const isLoss = r.netProfit < 0;
+  return `
+    <div class="tool-page">
+      <button class="back-btn" data-nav="home">${ICONS.arrowLeft} Kembali</button>
+      <div class="page-header">
+        <div class="page-icon">${ICONS.calculator}</div>
+        <div>
+          <h1 class="page-title">Kalkulator Untung</h1>
+          <p class="page-sub">Tentukan harga jual ideal & profit bersih secara otomatis.</p>
+        </div>
+      </div>
+
+      <div class="calc-layout">
+        <div class="card">
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Modal Barang</span><span class="field-hint">harga beli barang dari supplier</span></div>
+            <div class="input-money"><span class="input-money-prefix">Rp</span><input type="text" inputmode="numeric" value="${formatThousands(state.modal)}" data-money="modal" /></div>
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <div class="field-label"><span class="field-label-text">Ongkir</span><span class="field-hint">bila kamu tanggung</span></div>
+              <div class="input-money"><span class="input-money-prefix">Rp</span><input type="text" inputmode="numeric" value="${formatThousands(state.ongkir)}" data-money="ongkir" /></div>
+            </div>
+            <div class="field">
+              <div class="field-label"><span class="field-label-text">Biaya Packing</span></div>
+              <div class="input-money"><span class="input-money-prefix">Rp</span><input type="text" inputmode="numeric" value="${formatThousands(state.packing)}" data-money="packing" /></div>
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <div class="field-label"><span class="field-label-text">Biaya Iklan</span></div>
+              <div class="input-money"><span class="input-money-prefix">Rp</span><input type="text" inputmode="numeric" value="${formatThousands(state.iklan)}" data-money="iklan" /></div>
+            </div>
+            <div class="field">
+              <div class="field-label"><span class="field-label-text">Diskon</span></div>
+              <div class="input-money"><span class="input-money-prefix">Rp</span><input type="text" inputmode="numeric" value="${formatThousands(state.diskon)}" data-money="diskon" /></div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Fee Marketplace</span><span class="field-hint">Shopee ±8%, Tokopedia ±5%, TikTok ±10%</span></div>
+            <div class="slider-wrap">
+              <span class="slider-value">${state.feePct}%</span>
+              <input type="range" class="slider-aj" min="0" max="20" step="1" value="${state.feePct}" data-slider="feePct" style="background: linear-gradient(to right, var(--clay) 0%, var(--clay) ${(state.feePct/20)*100}%, var(--cream-deep) ${(state.feePct/20)*100}%, var(--cream-deep) 100%);" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Target Margin</span><span class="field-hint">seberapa untung yang kamu mau</span></div>
+            <div class="slider-wrap">
+              <span class="slider-value">${state.marginPct}%</span>
+              <input type="range" class="slider-aj" min="5" max="150" step="1" value="${state.marginPct}" data-slider="marginPct" style="background: linear-gradient(to right, var(--clay) 0%, var(--clay) ${(state.marginPct/150)*100}%, var(--cream-deep) ${(state.marginPct/150)*100}%, var(--cream-deep) 100%);" />
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-result">
+          <div class="panel-cream ${isLoss ? 'panel-loss' : ''}">
+            <div class="result-label-tiny" style="color: ${isLoss ? 'var(--rust)' : 'var(--clay-dark)'};">
+              ${ICONS.trending} ${isLoss ? 'Hati-hati: Rugi' : 'Hasil Hitung'}
+            </div>
+            <div class="result-price-label">Harga Jual Ideal</div>
+            <div class="result-price">${formatRupiah(r.idealPrice)}</div>
+            <div class="result-rows">
+              <div class="result-row"><span class="result-row-label">Total Biaya</span><span class="result-row-value">${formatRupiah(r.totalCost)}</span></div>
+              <div class="result-row"><span class="result-row-label">Profit Bersih</span><span class="result-row-value ${isLoss ? 'text-clay' : 'text-good'}">${formatRupiah(r.netProfit)}</span></div>
+              <div class="result-row"><span class="result-row-label">Margin Aktual</span><span class="result-row-value text-good">${r.realMargin.toFixed(1)}%</span></div>
+              <div class="result-row"><span class="result-row-label">Fee Marketplace</span><span class="result-row-value">${formatRupiah(r.feeAmount)}</span></div>
+            </div>
+            <div style="margin-top: 20px; display: flex; gap: 8px;">
+              <button class="btn-dark" data-action="copy-calc">${ICONS.copy} Salin Ringkasan</button>
+              <button class="btn-ghost" data-action="share-calc" style="white-space: nowrap;">${ICONS.share} Bagikan</button>
+            </div>
+            <p class="helper-text">💡 Harga jual sudah dibulatkan ke 1.000 terdekat ke atas untuk psychological pricing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function calcSummary() {
+  const r = computeProfit({ modal: state.modal, ongkir: state.ongkir, packing: state.packing, iklan: state.iklan, diskon: state.diskon, feePct: state.feePct, marginPct: state.marginPct });
+  return `📊 Ringkasan Hitung Untung — Alat Jualan
+
+Modal Barang     : ${formatRupiah(state.modal)}
+Ongkir           : ${formatRupiah(state.ongkir)}
+Biaya Packing    : ${formatRupiah(state.packing)}
+Biaya Iklan      : ${formatRupiah(state.iklan)}
+Diskon           : ${formatRupiah(state.diskon)}
+Fee Marketplace  : ${state.feePct}%
+Target Margin    : ${state.marginPct}%
+─────────────────────────
+Total Biaya      : ${formatRupiah(r.totalCost)}
+Harga Jual Ideal : ${formatRupiah(r.idealPrice)}
+Profit Bersih    : ${formatRupiah(r.netProfit)}
+Margin Aktual    : ${r.realMargin.toFixed(1)}%
+
+— dibuat dengan Alat Jualan`;
+}
+
+/* ---------- TITLE PAGE ---------- */
+function TitlePage() {
+  const detected = detectCategory(state.titleProduct);
+  const titles = state.titleGenerated ? generateTitles(state.titleProduct, state.titleCategory) : [];
+  const keywords = state.titleGenerated ? generateKeywords(state.titleProduct, state.titleCategory) : [];
+
+  return `
+    <div class="tool-page">
+      <button class="back-btn" data-nav="home">${ICONS.arrowLeft} Kembali</button>
+      <div class="page-header">
+        <div class="page-icon">${ICONS.sparkles}</div>
+        <div>
+          <h1 class="page-title">Pembuat Judul Produk</h1>
+          <p class="page-sub">8 variasi judul SEO + saran keyword, otomatis menyesuaikan kategori.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="field-row">
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Nama Produk</span><span class="field-hint">contoh: Tas Selempang Wanita</span></div>
+            <input type="text" class="input-text" placeholder="Tas Selempang Wanita Mini" value="${state.titleProduct.replace(/"/g, '&quot;')}" data-input="titleProduct" />
+          </div>
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Kategori</span></div>
+            ${categorySelectHTML(state.titleCategory, detected)}
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;">
+          <button class="btn-primary" data-action="gen-title">${ICONS.wand} Buat Judul Sekarang</button>
+          ${state.titleGenerated ? `<button class="btn-ghost" data-action="gen-title">${ICONS.refresh} Acak Ulang</button>` : ''}
+        </div>
+      </div>
+
+      ${state.titleGenerated && titles.length > 0 ? `
+        <div style="margin-top: 28px;" class="result-layout">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
+              <h3 style="font-family: var(--serif); font-size: 16px; font-weight: 600; margin: 0;">${titles.length} Judul Siap Pakai</h3>
+              <button data-action="copy-all-titles" style="font-size: 12px; font-weight: 600; color: var(--clay-dark); display: inline-flex; align-items: center; gap: 6px;">${ICONS.copy} Salin semua</button>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              ${titles.map((t, i) => `
+                <div class="title-card">
+                  <span class="title-num">${i+1}</span>
+                  <div class="title-text">
+                    ${t}
+                    <div class="title-meta ${t.length >= 60 && t.length <= 80 ? 'ideal' : ''}">${t.length} karakter${t.length >= 60 && t.length <= 80 ? ' ✓ ideal' : ''}</div>
+                  </div>
+                  <button class="title-copy" data-copy-text="${t.replace(/"/g, '&quot;')}">${ICONS.copy}</button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div>
+            <div class="kw-section">
+              <div class="kw-header">${ICONS.tag} Saran Keyword</div>
+              <p class="kw-desc">Keyword ini termasuk long-tail (lebih spesifik). Tambahkan ke deskripsi produk untuk peluang ranking lebih besar.</p>
+              <div class="kw-chips">
+                ${keywords.map(k => `<button class="kw-chip" data-copy-text="${k.replace(/"/g,'&quot;')}">${k}</button>`).join('')}
+              </div>
+              <button class="btn-dark" style="margin-top: 16px;" data-copy-text="${keywords.join(', ').replace(/"/g,'&quot;')}">${ICONS.copy} Salin Semua Keyword</button>
+              <p class="helper-text">💡 Judul ideal Shopee/Tokopedia: 60–80 karakter.</p>
+            </div>
+          </div>
+        </div>
+      ` : `
+        <div class="empty-state">Isi nama produk lalu tekan tombol "Buat Judul Sekarang" di atas.</div>
+      `}
+    </div>
+  `;
+}
+
+/* ---------- CAPTION PAGE ---------- */
+const CAPTION_MODES = [
+  { id: 'promo', label: 'Promo', icon: ICONS.tag, hint: 'Diskon & penawaran' },
+  { id: 'soft', label: 'Soft Selling', icon: ICONS.heart, hint: 'Bercerita, halus' },
+  { id: 'hard', label: 'Hard Selling', icon: ICONS.zap, hint: 'Dorong order langsung' },
+  { id: 'wa', label: 'WA Broadcast', icon: ICONS.send, hint: 'Untuk blast WA' },
+  { id: 'live', label: 'Live Selling', icon: ICONS.radio, hint: 'Skrip siaran live' },
+];
+
+function CaptionPage() {
+  const detected = detectCategory(state.capProduct);
+  const caption = state.capGenerated && state.capProduct.trim() ? buildCaption(state.capMode, { product: state.capProduct, harga: state.capHarga, benefit: state.capBenefit, categoryKey: state.capCategory }) : '';
+  const modeLabel = CAPTION_MODES.find(m => m.id === state.capMode)?.label;
+
+  return `
+    <div class="tool-page">
+      <button class="back-btn" data-nav="home">${ICONS.arrowLeft} Kembali</button>
+      <div class="page-header">
+        <div class="page-icon">${ICONS.message}</div>
+        <div>
+          <h1 class="page-title">Pembuat Caption Jualan</h1>
+          <p class="page-sub">Pilih gaya, isi produk, caption otomatis menyesuaikan tone kategori.</p>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 20px;">
+        <div class="field-label"><span class="field-label-text">Pilih Gaya Caption</span></div>
+        <div class="mode-grid">
+          ${CAPTION_MODES.map(m => `
+            <button class="mode-btn ${state.capMode === m.id ? 'active' : ''}" data-mode="${m.id}">
+              <span style="color: ${state.capMode === m.id ? 'var(--cream)' : 'var(--clay-dark)'};">${m.icon}</span>
+              <div class="mode-btn-label">${m.label}</div>
+              <div class="mode-btn-hint">${m.hint}</div>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="field-row">
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Nama Produk</span></div>
+            <input type="text" class="input-text" placeholder="Tas Selempang Wanita Mini" value="${state.capProduct.replace(/"/g,'&quot;')}" data-input="capProduct" />
+          </div>
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Kategori Produk</span><span class="field-hint">tone caption ikut kategori</span></div>
+            ${categorySelectHTML(state.capCategory, detected)}
+          </div>
+        </div>
+        <div class="field-row" style="margin-top: 16px;">
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Harga</span><span class="field-hint">opsional</span></div>
+            <div class="input-money"><span class="input-money-prefix">Rp</span><input type="text" inputmode="numeric" placeholder="kosongkan jika tidak perlu" value="${formatThousands(state.capHarga)}" data-money="capHarga" /></div>
+          </div>
+          <div class="field">
+            <div class="field-label"><span class="field-label-text">Keunggulan / Benefit</span><span class="field-hint">opsional</span></div>
+            <input type="text" class="input-text" placeholder="Bahan kulit asli, anti air, muat banyak" value="${state.capBenefit.replace(/"/g,'&quot;')}" data-input="capBenefit" />
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
+          <button class="btn-primary" data-action="gen-caption">${ICONS.wand} Buat Caption Sekarang</button>
+          ${state.capGenerated ? `<button class="btn-ghost" data-action="gen-caption">${ICONS.refresh} Acak Ulang</button>` : ''}
+        </div>
+      </div>
+
+      ${caption ? `
+        <div style="margin-top: 28px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
+            <h3 style="font-family: var(--serif); font-size: 16px; font-weight: 600; margin: 0;">Caption Siap Pakai — <span style="color: var(--clay-dark);">${modeLabel}</span></h3>
+            <span style="font-size: 12px; color: var(--muted);">${caption.length} karakter</span>
+          </div>
+          <div class="caption-output">
+            <pre class="caption-text">${caption.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</pre>
+            <div class="caption-actions">
+              <button class="btn-dark" data-action="copy-caption">${ICONS.copy} Salin Caption</button>
+              <button class="btn-ghost" data-action="share-caption" style="white-space: nowrap;">${ICONS.share} Bagikan</button>
+            </div>
+          </div>
+          <p class="helper-text-md">💡 Tekan "Acak Ulang" untuk variasi caption yang berbeda dengan gaya & kategori sama.</p>
+        </div>
+      ` : `
+        <div class="empty-state">Isi nama produk dan tekan "Buat Caption Sekarang".</div>
+      `}
+    </div>
+  `;
+}
+
+/* ============================================================
+   RENDER & EVENT BINDING
+   ============================================================ */
+function render() {
+  const root = document.getElementById('root');
+  let body;
+  switch (state.view) {
+    case 'calc': body = CalcPage(); break;
+    case 'title': body = TitlePage(); break;
+    case 'caption': body = CaptionPage(); break;
+    default: body = HomePage();
+  }
+  root.innerHTML = `${Header()}<main>${body}</main>${Footer()}`;
+  bindEvents();
+}
+
+function bindEvents() {
+  // Navigation
+  document.querySelectorAll('[data-nav]').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); navigate(el.dataset.nav); });
+  });
+
+  // Money inputs (with format on input)
+  document.querySelectorAll('[data-money]').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const key = e.target.dataset.money;
+      const n = parseNumber(e.target.value);
+      state[key] = n;
+      // re-format displayed value but keep cursor
+      const formatted = formatThousands(n);
+      e.target.value = formatted;
+      // re-render only the calc result if on calc page
+      if (state.view === 'calc') updateCalcResult();
+    });
+  });
+
+  // Sliders
+  document.querySelectorAll('[data-slider]').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const key = e.target.dataset.slider;
+      state[key] = parseInt(e.target.value, 10);
+      // update gradient
+      const max = parseInt(e.target.max, 10);
+      const pct = (state[key] / max) * 100;
+      e.target.style.background = `linear-gradient(to right, var(--clay) 0%, var(--clay) ${pct}%, var(--cream-deep) ${pct}%, var(--cream-deep) 100%)`;
+      // update label
+      const label = e.target.parentElement.querySelector('.slider-value');
+      if (label) label.textContent = `${state[key]}%`;
+      updateCalcResult();
+    });
+  });
+
+  // Text inputs
+  document.querySelectorAll('[data-input]').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const key = e.target.dataset.input;
+      state[key] = e.target.value;
+      // refresh suggestion panel only (don't full re-render to avoid losing focus)
+      refreshSuggestion();
+    });
+  });
+
+  // Category select
+  document.querySelectorAll('[data-cat-select]').forEach(sel => {
+    sel.addEventListener('change', (e) => {
+      if (state.view === 'title') state.titleCategory = e.target.value;
+      if (state.view === 'caption') state.capCategory = e.target.value;
+      refreshSuggestion();
+    });
+  });
+
+  // Category suggestion accept
+  document.querySelectorAll('[data-cat-suggest]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const newCat = btn.dataset.catSuggest;
+      if (state.view === 'title') state.titleCategory = newCat;
+      if (state.view === 'caption') state.capCategory = newCat;
+      render();
+    });
+  });
+
+  // Caption mode tabs
+  document.querySelectorAll('[data-mode]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      state.capMode = btn.dataset.mode;
+      if (state.capGenerated) state.capSeed++;
+      render();
+    });
+  });
+
+  // Generate buttons
+  document.querySelectorAll('[data-action]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const a = btn.dataset.action;
+      if (a === 'gen-title') {
+        if (!state.titleProduct.trim()) { showToast('Isi nama produk dulu'); return; }
+        state.titleGenerated = true; state.titleSeed++;
+        render();
+      } else if (a === 'gen-caption') {
+        if (!state.capProduct.trim()) { showToast('Isi nama produk dulu'); return; }
+        state.capGenerated = true; state.capSeed++;
+        render();
+      } else if (a === 'copy-calc') {
+        copyText(calcSummary());
+      } else if (a === 'share-calc') {
+        shareText(calcSummary());
+      } else if (a === 'copy-caption') {
+        const cap = buildCaptionFromState();
+        copyText(cap);
+      } else if (a === 'share-caption') {
+        shareText(buildCaptionFromState());
+      } else if (a === 'copy-all-titles') {
+        const titles = generateTitlesCached();
+        copyText(titles.map((t,i) => `${i+1}. ${t}`).join('\n'));
+      }
+    });
+  });
+
+  // Individual copy buttons (titles, keywords)
+  document.querySelectorAll('[data-copy-text]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      copyText(btn.dataset.copyText);
+    });
+  });
+}
+
+// title cache to avoid regenerating on copy-all
+let _titleCache = { seed: -1, product: '', cat: '', titles: [] };
+function generateTitlesCached() {
+  if (_titleCache.seed === state.titleSeed && _titleCache.product === state.titleProduct && _titleCache.cat === state.titleCategory) {
+    return _titleCache.titles;
+  }
+  const titles = generateTitles(state.titleProduct, state.titleCategory);
+  _titleCache = { seed: state.titleSeed, product: state.titleProduct, cat: state.titleCategory, titles };
+  return titles;
+}
+
+// caption cache
+let _capCache = { seed: -1, key: '', text: '' };
+function buildCaptionFromState() {
+  const key = `${state.capMode}|${state.capProduct}|${state.capHarga}|${state.capBenefit}|${state.capCategory}|${state.capSeed}`;
+  if (_capCache.seed === state.capSeed && _capCache.key === key) return _capCache.text;
+  const text = buildCaption(state.capMode, { product: state.capProduct, harga: state.capHarga, benefit: state.capBenefit, categoryKey: state.capCategory });
+  _capCache = { seed: state.capSeed, key, text };
+  return text;
+}
+
+function refreshSuggestion() {
+  const product = state.view === 'title' ? state.titleProduct : state.capProduct;
+  const currentCat = state.view === 'title' ? state.titleCategory : state.capCategory;
+  const detected = detectCategory(product);
+  const showSuggest = detected && detected !== currentCat;
+
+  // find suggestion node and update without full re-render
+  const selectEls = document.querySelectorAll('[data-cat-select]');
+  selectEls.forEach(sel => {
+    const wrapper = sel.parentElement;
+    let suggest = wrapper.querySelector('.panel-warn');
+    if (showSuggest) {
+      const html = `
+        <span style="color: var(--warn); margin-top: 1px;">${ICONS.bulb}</span>
+        <span style="font-size: 12px; line-height: 1.5;">
+          Sepertinya produk ini lebih cocok di kategori
+          <strong style="color: var(--warn);">${CATEGORIES[detected].label}</strong>.
+          <span style="color: var(--clay-dark); font-weight: 600;">Pakai itu?</span>
+        </span>
+      `;
+      if (!suggest) {
+        suggest = document.createElement('button');
+        suggest.className = 'panel-warn';
+        wrapper.appendChild(suggest);
+      }
+      suggest.innerHTML = html;
+      suggest.dataset.catSuggest = detected;
+      suggest.onclick = () => {
+        if (state.view === 'title') state.titleCategory = detected;
+        if (state.view === 'caption') state.capCategory = detected;
+        render();
+      };
+    } else if (suggest) {
+      suggest.remove();
+    }
+  });
+}
+
+function updateCalcResult() {
+  if (state.view !== 'calc') return;
+  const r = computeProfit({ modal: state.modal, ongkir: state.ongkir, packing: state.packing, iklan: state.iklan, diskon: state.diskon, feePct: state.feePct, marginPct: state.marginPct });
+  const isLoss = r.netProfit < 0;
+  const panel = document.querySelector('.panel-cream');
+  if (!panel) return;
+  panel.classList.toggle('panel-loss', isLoss);
+  const labelTiny = panel.querySelector('.result-label-tiny');
+  if (labelTiny) {
+    labelTiny.style.color = isLoss ? 'var(--rust)' : 'var(--clay-dark)';
+    labelTiny.innerHTML = `${ICONS.trending} ${isLoss ? 'Hati-hati: Rugi' : 'Hasil Hitung'}`;
+  }
+  panel.querySelector('.result-price').textContent = formatRupiah(r.idealPrice);
+  const rows = panel.querySelectorAll('.result-row .result-row-value');
+  if (rows.length === 4) {
+    rows[0].textContent = formatRupiah(r.totalCost);
+    rows[1].textContent = formatRupiah(r.netProfit);
+    rows[1].className = 'result-row-value ' + (isLoss ? 'text-clay' : 'text-good');
+    rows[2].textContent = `${r.realMargin.toFixed(1)}%`;
+    rows[3].textContent = formatRupiah(r.feeAmount);
+  }
+}
+
+/* ---------- INIT ---------- */
+const initialView = (location.hash || '#home').slice(1) || 'home';
+if (['home','calc','title','caption'].includes(initialView)) state.view = initialView;
+render();
+</script>
+</body>
+</html>
